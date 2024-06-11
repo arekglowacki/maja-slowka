@@ -26,11 +26,11 @@ function divideWordsIntoBuckets(words: Word[]): Buckets {
             newWords.push(word);
         } else if (word.score < 3) {
             firstLevel.push(word);
-        } else if (word.score >= 3) {
+        } else if (word.score < 8) {
             secondLevel.push(word);
-        } else if (word.score >= 6) {
+        } else if (word.score < 13) {
             thirdLevel.push(word);
-        } else if (word.score >= 12) {
+        } else {
             fourthLevel.push(word);
         }
     }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 import {useEffect, useState} from "react";
 import Timeout from "./timeout.tsx";
+import {basePath} from "../conf.ts";
 
 const TIMEOUT_SECONDS = 6;
 
@@ -42,19 +43,19 @@ export const WordView = (props: WordViewProps) => {
     }
 
     useEffect(() => {
-        const audio = new Audio(`/audio/${word.id}_pl.mp3`);
+        const audio = new Audio(`${basePath}/audio/${word.id}_pl.mp3`);
         audio.play();
         setSecondsLasted(0);
         setTimeout(timeoutFunc, 1000);
     }, [word]);
 
     const playEng = () => {
-        const audio = new Audio(`/audio/${word.id}_en.mp3`);
+        const audio = new Audio(`${basePath}/audio/${word.id}_en.mp3`);
         audio.play()
     }
 
     const playPl = () => {
-        const audio = new Audio(`/audio/${word.id}_pl.mp3`);
+        const audio = new Audio(`${basePath}/audio/${word.id}_pl.mp3`);
         audio.play()
     }
 
@@ -62,15 +63,15 @@ export const WordView = (props: WordViewProps) => {
         <Container>
             <h1>{word.polish}</h1>
             <ImgWrapper>
-                <img style={{width: "500px"}} src={`/img/${word.id}.webp`} alt={word.polish}/>
+                <img style={{width: "500px"}} src={`${basePath}/img/${word.id}.webp`} alt={word.polish}/>
             </ImgWrapper>
             <Timeout key={word.id} onTimeout={playEng} />
             <ButtonsContainer>
                 <Button size="lg" variant="light" onClick={playEng}>
-                    <img style={{width: '44px'}} src="/EN.svg"/>
+                    <img style={{width: '44px'}} src={basePath + "/EN.svg"}/>
                 </Button>
                 <Button size="lg" variant="light" onClick={playPl}>
-                    <img style={{width: '44px'}} src="/PL.svg"/>
+                    <img style={{width: '44px'}} src={basePath + "/PL.svg"}/>
                 </Button>
                 <Button onClick={() => props.onWrongAnswer(word.id)} variant="danger" size="lg">Wrong</Button>
                 <Button onClick={() => props.onCorrectAnswer(word.id)} variant="success" size="lg">Correct</Button>
